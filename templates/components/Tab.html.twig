@@ -1,0 +1,17 @@
+<{{ as }}
+    {{
+        attributes
+            .without("role")
+            .defaults({
+                class: cva({
+                    base: "tab",
+                }).apply(
+                    {},
+                    (active ? "tab-active" : null),
+                ),
+                role: "tab",
+            })
+    }}
+>
+    {% block content %}{% endblock %}
+</{{ as }}>

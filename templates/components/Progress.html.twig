@@ -1,0 +1,24 @@
+<progress
+    {{ attributes
+        .defaults({
+            class: cva({
+                base: "progress",
+                variants: {
+                    theme: {
+                        primary: "progress-primary",
+                        secondary: "progress-secondary",
+                        accent: "progress-accent",
+                        info: "progress-info",
+                        success: "progress-success",
+                        warning: "progress-warning",
+                        error: "progress-error",
+                    },
+                },
+            })
+            .apply(
+                { theme },
+            ),
+        })
+    }}
+>
+</progress>

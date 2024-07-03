@@ -1,0 +1,37 @@
+name: Update docs
+
+on:
+    push:
+        branches:
+            - main
+        paths:
+            - 'src/Twig/**/*.php'
+        tags-ignore:
+            - '**'
+
+jobs:
+    generate:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup
+              uses: shivammathur/setup-php@v2
+
+            - name: Install dependencies
+              run: composer install --no-interaction
+
+            - name: Generate docs
+              run: |
+                  mkdir -p docs
+                  php .github/scripts/generate-component-docs
+
+            - name: Pull Remote Changes
+              run: git pull
+
+            - name: Commit
+              uses: stefanzweifel/git-auto-commit-action@v5
+              with:
+                  commit_message: 'Update documentation'
+                  file_pattern: docs/*.md

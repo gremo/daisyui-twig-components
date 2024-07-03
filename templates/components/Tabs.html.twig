@@ -1,0 +1,28 @@
+<div
+    {{ attributes
+        .without("role")
+        .defaults({
+            class: cva({
+                base: "tabs",
+                variants: {
+                    size: {
+                        xs: "tabs-xs",
+                        sm: "tabs-sm",
+                        md: "tabs-md",
+                        lg: "tabs-lg",
+                    },
+                    shape: {
+                        boxed: "tabs-boxed",
+                        bordered: "tabs-bordered",
+                        lifted: "tabs-lifted",
+                    },
+                },
+            }).apply(
+                { size, shape },
+            ),
+            role: "tablist",
+        })
+    }}
+>
+    {% block content %}{% endblock %}
+</div>

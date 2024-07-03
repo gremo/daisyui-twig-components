@@ -1,0 +1,10 @@
+<{{ as }}
+    {{ attributes
+        .defaults({
+            class: "drawer",
+        })
+    }}
+>
+    <input id="{{ id }}" type="checkbox" class="drawer-toggle">
+    {% block content %}{% endblock %}
+</{{ as }}>

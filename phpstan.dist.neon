@@ -1,0 +1,9 @@
+parameters:
+    level: 6
+    paths:
+        - .github/scripts/
+        - src/
+        - tests/
+    ignoreErrors:
+        - { identifier: missingType.iterableValue, path: tests/* }
+        - '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition::children\(\).#'

@@ -1,0 +1,25 @@
+<{{ as }}
+    {{ attributes
+        .defaults({
+            class: cva({
+                base: "alert",
+                variants: {
+                    theme: {
+                        info: "alert-info",
+                        success: "alert-success",
+                        warning: "alert-warning",
+                        error: "alert-error",
+                    },
+                },
+            }).apply(
+                { theme },
+            ),
+        })
+    }}
+>
+    {% block content %}
+        {% if content is not null %}
+            {{ content }}
+        {% endif %}
+    {% endblock %}
+</{{ as }}>

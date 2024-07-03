@@ -1,0 +1,26 @@
+<{{ as }}
+    {{ attributes
+        .defaults({
+            class: cva({
+                base: "kbd",
+                variants: {
+                    size: {
+                        lg: "kbd-lg",
+                        md: "kbd-md",
+                        sm: "kbd-sm",
+                        xs: "kbd-xs",
+                    },
+                },
+            })
+            .apply(
+                { size },
+            ),
+        })
+    }}
+>
+    {% block content %}
+        {% if content is not null %}
+            {{ content }}
+        {% endif %}
+    {% endblock %}
+</{{ as }}>

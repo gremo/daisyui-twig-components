@@ -1,0 +1,72 @@
+#!/usr/bin/env php
+<?php
+
+require(__DIR__.'/../../vendor/autoload.php');
+
+const SRC_DIR = __DIR__.'/../../src/';
+const DOCS_DIR = __DIR__.'/../../docs/';
+
+const INDEX_FILENAME = 'README.md';
+const COMPONENT_FILENAME_PATTERN = '%s.md';
+
+use phpDocumentor\Reflection\DocBlock\Description;
+
+$twig = new \Twig\Environment(new \Twig\Loader\FilesystemLoader(__DIR__));
+$docBlockFactory = \phpDocumentor\Reflection\DocBlockFactory::createInstance();
+
+$componentsContext = [];
+$coreComponents = [];
+foreach ((new \Symfony\Component\Finder\Finder())
+    ->files()
+    ->in(SRC_DIR.'Twig/Components')
+    ->name('*.php') as $file
+) {
+    $componentName = $file->getFilenameWithoutExtension();
+    $reflection = new \ReflectionClass("Gremo\DaisyUITwigComponents\Twig\Components\\$componentName");
+    $docBlock = ($docComment = $reflection->getDocComment()) ? $docBlockFactory->create($docComment) : null;
+
+    $context = [];
+    $context['name'] = $componentName;
+    $context['package'] = (string) ($docBlock?->getTagsByName('package')[0] ?? '');
+    $context['summary'] = trim($docBlock?->getSummary());
+    $context['example'] = (string) $docBlock?->getDescription();
+    $context['detailsUrl'] = (string) ($docBlock?->getTagsByName('link')[0] ?? '');
+    $context['related'] = array_map(
+        fn(\phpDocumentor\Reflection\DocBlock\Tags\See $t) => ltrim($t->getReference(), '\\'),
+        $docBlock?->getTagsByName('see') ?? []
+    );
+
+    if ('Core' === $context['package']) {
+        $coreComponents[] = $componentName;
+    }
+
+    $context['props'] = [];
+    foreach ($reflection->getProperties(\ReflectionProperty::IS_PUBLIC) as $property) {
+        $propertyDocBlock = ($docComment = $property->getDocComment()) ? $docBlockFactory->create($docComment) : null;
+
+        $context['props'][$property->getName()] = [
+            'name' => $property->getName(),
+            'type' => $property->getType()?->getName(),
+            'description' => $propertyDocBlock?->getSummary(),
+            'required' => !$property->hasDefaultValue() && !$property->getType()?->allowsNull(),
+            'nullable' => $property->getType()?->allowsNull(),
+            'default' => is_bool($property->getDefaultValue()) || is_null($property->getDefaultValue())
+                ? strtolower(var_export($property->getDefaultValue(), true))
+                : $property->getDefaultValue()
+            ,
+        ];
+    }
+
+    $componentsContext[$componentName] = $context;
+    file_put_contents(
+        sprintf(DOCS_DIR.COMPONENT_FILENAME_PATTERN, $componentName),
+        $twig->render('generate-component.md.twig', $context)
+    );
+}
+
+$indexedPackages = array_intersect_key($componentsContext, array_flip($coreComponents));
+ksort($indexedPackages);
+file_put_contents(
+    sprintf(DOCS_DIR.INDEX_FILENAME, $componentName),
+    $twig->render('generate-index.md.twig', ['components' => $indexedPackages])
+);

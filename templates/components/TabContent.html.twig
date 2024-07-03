@@ -1,0 +1,13 @@
+<input type="radio" name="{{ tab }}" class="tab" role="tab" aria-label="{{ label }}"{% if active %} checked{% endif %}>
+<div
+    {{
+        attributes
+            .without("role")
+            .defaults({
+                class: "tab-content",
+                role: "tabpanel",
+            })
+    }}
+>
+    {% block content %}{% endblock %}
+</div>

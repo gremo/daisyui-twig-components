@@ -1,0 +1,71 @@
+name: Update README
+
+on:
+    push:
+        branches:
+            - main
+        paths:
+            - 'templates/components/**/*.twig'
+        tags-ignore:
+            - '**'
+    schedule:
+        - cron: 0 0 * * *
+
+jobs:
+    update:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup
+              run: |
+                # Install bc
+                sudo apt-get install -y bc
+
+                # Download Tailwind CLI
+                curl -fL -o tailwindcss https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64
+                chmod +x tailwindcss
+
+                # Init tailwind.config.js and add daisyUI plugin
+                ./tailwindcss init
+                sed -i "s/plugins: \[\]/plugins: \[require('daisyui')\]/" tailwind.config.js
+
+                # Create a Tailwind input CSS
+                (
+                    echo '@tailwind components;'
+                    echo '@tailwind utilities;'
+                ) > input.css
+
+                # Install daisyUI
+                npm init -y
+                npm i -D daisyui@^4
+
+            - name: Build CSS
+              run: |
+                # Build the CSS
+                ./tailwindcss -i input.css -o components.css --content templates/components/**/*.html.twig
+                ./tailwindcss -i input.css -m -o components.min.css --content templates/components/**/*.html.twig
+
+                # Calculate sizes
+                added_kb=$(echo "scale=2; $(stat -c "%s" components.css) / 1024" | bc)
+                minified_added_kb=$(echo "scale=2; $(stat -c "%s" components.min.css) / 1024" | bc)
+                gzipped_added_kb=$(gzip -c components.min.css | wc -c | bc -l <<< "scale=2; $(cat) / 1024")
+
+                # Create the output file
+                json_result='[
+                    {
+                        "Uncompressed": "'$added_kb' kB",
+                        "Minified": "'$minified_added_kb' kB",
+                        "Gzipped": "'$gzipped_added_kb' kB"
+                    }
+                ]'
+                echo "$json_result" > .github/css-metadata.json
+
+            - name: Pull Remote Changes
+              run: git pull
+
+            - name: Markdown autodocs
+              uses: dineshsonachalam/markdown-autodocs@v1.0.4
+              with:
+                commit_message: "Update documentation"

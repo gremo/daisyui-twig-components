@@ -1,0 +1,23 @@
+<{{ as }}
+    {{ attributes
+        .defaults({
+            class: cva({
+                base: "loading",
+                variants: {
+                    shape: {
+                        spinner: "loading-spinner",
+                        dots: "loading-dots",
+                        ring: "loading-ring",
+                        ball: "loading-ball",
+                        bars: "loading-bars",
+                        infinity: "loading-infinity",
+                    },
+                },
+            })
+            .apply(
+                { shape },
+            ),
+        })
+    }}
+>
+</{{ as }}>

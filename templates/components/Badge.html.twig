@@ -1,0 +1,38 @@
+<{{ as }}
+    {{ attributes
+        .defaults({
+            class: cva({
+                base: "badge",
+                variants: {
+                    theme: {
+                        neutral: "badge-neutral",
+                        primary: "badge-primary",
+                        secondary: "badge-secondary",
+                        accent: "badge-accent",
+                        ghost: "badge-ghost",
+                        info: "badge-info",
+                        success: "badge-success",
+                        warning: "badge-warning",
+                        error: "badge-error",
+                    },
+                    size: {
+                        lg: "badge-lg",
+                        md: "badge-md",
+                        sm: "badge-sm",
+                        xs: "badge-xs",
+                    },
+                },
+            })
+            .apply(
+                { theme, size },
+                (outline ? "badge-outline" : null),
+            ),
+        })
+    }}
+>
+    {% block content %}
+        {% if content is not null %}
+            {{ content }}
+        {% endif %}
+    {% endblock %}
+</{{ as }}>

@@ -1,0 +1,33 @@
+# 🧩 {{ name }}
+[Source (PHP)](/src/Twig/Components/{{ name }}.php) • [Source (Twig)](/templates/components/{{ name }}.html.twig){% if detailsUrl %} • [daisyUI docs]({{ detailsUrl }}){% endif %}
+
+
+{% if summary %}
+{{ summary }}
+{% else %}
+*Description not yet available.*
+{% endif %}
+
+## 🚀 Example
+
+{% if example %}
+{{ example|raw }}
+{% else %}
+*Example not yet available.*
+{% endif %}
+
+## ⚙️ Props
+
+| Prop     | Description | Type        | Required   | Default |
+| -------- | ----------- | :---------: | :--------: | ------- |
+{% for prop in props %}
+| {% if prop.required %}<b>{% endif %}`{{ prop.name }}`{% if prop.required %}</b>{% endif %} | {{ prop.description }} | `{{ prop.nullable ? 'null\\|' : '' }}{{ prop.type }}` | {{ prop.required ? 'Yes' : '' }} | {{ prop.default is not null ? '`'~prop.default|raw~'`' : '' }} |
+{% endfor %}
+{% if related %}
+
+## 📖 Related
+
+{% for component in related %}
+- [{{ component }}]({{ component }}.md)
+{% endfor %}
+{% endif %}

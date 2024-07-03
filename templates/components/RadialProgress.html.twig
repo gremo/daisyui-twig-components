@@ -1,0 +1,18 @@
+<div
+    {{ attributes
+        .without("role", "style")
+        .defaults({
+            class: "radial-progress",
+            role: "progressbar",
+            style: "--value:#{value};"~(size is not null ? " --size:#{size};" : "")~(thickness is not null ? "--thickness:#{thickness};" : ""),
+        })
+    }}
+>
+    {% block content %}
+        {% if content is not null %}
+            {{ content }}
+        {% else %}
+            {{ value }}
+        {% endif %}
+    {% endblock %}
+</div>

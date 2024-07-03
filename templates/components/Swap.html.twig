@@ -1,0 +1,34 @@
+<label
+    {{ attributes
+        .defaults({
+            class: cva({
+                base: "swap",
+                variants: {
+                    effect: {
+                        rotate: "swap-rotate",
+                        flip: "swap-flip",
+                    },
+                },
+            })
+            .apply(
+                { effect },
+            ),
+        })
+    }}
+>
+    <input type="checkbox"{% if active %} checked{% endif %}>
+    <div {{ attributes.nested("on").defaults({ class: "swap-on" }) }}>
+        {% block on %}
+            {% if on is not null %}
+                {{ on }}
+            {% endif %}
+        {% endblock %}
+    </div>
+    <div {{ attributes.nested("off").defaults({ class: "swap-off" }) }}>
+        {% block off %}
+            {% if off is not null %}
+                {{ off }}
+            {% endif %}
+        {% endblock %}
+    </div>
+</label>

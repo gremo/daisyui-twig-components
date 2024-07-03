@@ -1,0 +1,48 @@
+<{{ as }}
+    {{ attributes
+        .defaults({
+            class: cva({
+                base: "btn",
+                variants: {
+                    theme: {
+                        neutral: "btn-neutral",
+                        primary: "btn-primary",
+                        secondary: "btn-secondary",
+                        accent: "btn-accent",
+                        info: "btn-info",
+                        success: "btn-success",
+                        warning: "btn-warning",
+                        error: "btn-error",
+                        ghost: "btn-ghost",
+                        link: "btn-link",
+                        grass: "grass",
+                    },
+                    size: {
+                        xs: "btn-xs",
+                        sm: "btn-sm",
+                        md: "btn-md",
+                        lg: "btn-lg",
+                    },
+                    shape: {
+                        circle: "btn-circle",
+                        square: "btn-square",
+                    },
+                },
+            })
+            .apply(
+                { theme, size, shape },
+                (outline ? "btn-outline" : null),
+                (active ? "btn-active" : null),
+                (wide ? "btn-wide" : null),
+                (block ? "btn-block" : null),
+                (noAnimation ? "no-animation" : null),
+            ),
+        })
+    }}
+>
+    {% block content %}
+        {% if content is not null %}
+            {{ content }}
+        {% endif %}
+    {% endblock %}
+</{{ as }}>
