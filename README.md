@@ -18,7 +18,7 @@ A collection of [daisyUI](https://daisyui.com) components as [Symfony UX Twig Co
 Worried about the extra CSS addewd by components? Don't be:
 
 <!-- MARKDOWN-AUTO-DOCS:START (JSON_TO_HTML_TABLE:src=./.github/css-metadata.json) -->
-<table class="JSON-TO-HTML-TABLE"><thead><tr><th class="uncompressed-th">Uncompressed</th><th class="minified-th">Minified</th><th class="gzipped-th">Gzipped</th></tr></thead><tbody ><tr ><td class="uncompressed-td td_text">80.54 kB</td><td class="minified-td td_text">67.62 kB</td><td class="gzipped-td td_text">9.76 kB</td></tr></tbody></table>
+<table class="JSON-TO-HTML-TABLE"><thead><tr><th class="uncompressed-th">Uncompressed</th><th class="minified-th">Minified</th><th class="gzipped-th">Gzipped</th></tr></thead><tbody ><tr ><td class="uncompressed-td td_text">80.63 kB</td><td class="minified-td td_text">67.70 kB</td><td class="gzipped-td td_text">9.77 kB</td></tr></tbody></table>
 <!-- MARKDOWN-AUTO-DOCS:END -->
 
 *CSS size is calculated programmatically and upon modifications of any component.*
