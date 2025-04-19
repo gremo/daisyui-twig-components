@@ -1,0 +1,35 @@
+{% props
+    as = "button",
+    label = null,
+    active = false,
+    current = null,
+%}
+<{{ as }}
+    {{- attributes
+        .defaults({
+            ...(active
+                ? {
+                      "aria-current": current is not null ? current : true,
+                      class: "dock-active",
+                  }
+                : {}
+            ),
+        })
+    -}}
+>
+    {% block content %}{% endblock %}
+    {% block label %}
+        {% if label is not null %}
+            <span
+                {{- attributes
+                    .nested("label")
+                    .defaults({
+                        class: "dock-label",
+                    })
+                -}}
+            >
+                {{ label }}
+            </span>
+        {% endif %}
+    {% endblock %}
+</{{ as }}>

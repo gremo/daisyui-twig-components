@@ -1,0 +1,35 @@
+<{{ as }}
+    {{- attributes
+        .defaults({
+            class: html_cva(
+                base: "alert",
+                variants: {
+                    color: {
+                        error: "alert-error",
+                        info: "alert-info",
+                        success: "alert-success",
+                        warning: "alert-warning",
+                    },
+                    direction: {
+                        horizontal: "alert-horizontal",
+                        vertical: "alert-vertical",
+                    },
+                    variant: {
+                        dash: "alert-dash",
+                        outline: "alert-outline",
+                        soft: "alert-soft",
+                    },
+                },
+            ).apply(
+                {
+                    color,
+                    direction,
+                    variant,
+                },
+            ),
+            role: "alert",
+        })
+    -}}
+>
+    {% block content %}{% if content is not null %}<span>{{ content }}</span>{% endif %}{% endblock %}
+</{{ as }}>

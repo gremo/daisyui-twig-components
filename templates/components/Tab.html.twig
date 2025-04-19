@@ -1,0 +1,34 @@
+{% props
+    as = "div",
+    label,
+    active = false,
+    disabled = false,
+%}
+<input
+    {{
+        attributes
+            .nested("input")
+            .without("active", "checked", "type")
+            .defaults({
+                ...(inputAttributes ?? {}),
+                "aria-label": label,
+                checked: active,
+                class: html_classes("tab", {
+                    "tab-disabled": disabled,
+                }),
+                type: "radio",
+            })
+    }}
+>
+<{{ as }}
+    {{
+        attributes
+            .without("role")
+            .defaults({
+                class: "tab-content",
+                role: "tabpanel",
+            })
+    }}
+>
+    {% block content %}{% endblock %}
+</{{ as }}>

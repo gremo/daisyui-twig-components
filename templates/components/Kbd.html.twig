@@ -1,0 +1,22 @@
+<kbd
+    {{- attributes
+        .defaults({
+            class: html_cva(
+                base: "kbd",
+                variants: {
+                    size: {
+                        lg: "kbd-lg",
+                        md: "kbd-md",
+                        sm: "kbd-sm",
+                        xl: "kbd-xl",
+                        xs: "kbd-xs",
+                    },
+                },
+            ).apply({
+                size,
+            }),
+        })
+    -}}
+>
+    {% block content %}{% if content is not null %}{{ content }}{% endif %}{% endblock %}
+</kbd>

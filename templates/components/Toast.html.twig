@@ -1,0 +1,28 @@
+<{{ as }}
+    {{- attributes
+        .defaults({
+            class: html_cva(
+                base: "toast",
+                variants: {
+                    align: {
+                        center: "toast-center",
+                        end: "toast-end",
+                        start: "toast-start",
+                    },
+                    placement: {
+                        top: "toast-top",
+                        middle: "toast-middle",
+                        bottom: "toast-bottom",
+                    },
+                },
+            ).apply(
+                {
+                    align,
+                    placement,
+                },
+            ),
+        })
+    -}}
+>
+    {% block content %}{% endblock %}
+</{{ as }}>

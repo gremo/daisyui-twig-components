@@ -1,0 +1,13 @@
+{% props
+    as = "div",
+%}
+
+<{{ as }}
+    {{ attributes
+        .defaults({
+            class: "drawer-content",
+        })
+    }}
+>
+    {% block content %}{% endblock %}
+</{{ as }}>

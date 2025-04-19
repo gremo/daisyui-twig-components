@@ -1,0 +1,30 @@
+<{{ as }}
+    {{- attributes
+        .defaults({
+            class: html_cva(
+                base: "loading",
+                variants: {
+                    size: {
+                        lg: "loading-lg",
+                        md: "loading-md",
+                        sm: "loading-sm",
+                        xl: "loading-xl",
+                        xs: "loading-xs",
+                    },
+                    variant: {
+                        ball: "loading-ball",
+                        bars: "loading-bars",
+                        dots: "loading-dots",
+                        infinity: "loading-infinity",
+                        ring: "loading-ring",
+                        spinner: "loading-spinner",
+                    },
+                },
+            ).apply({
+                size,
+                variant,
+            }),
+        })
+    -}}
+>
+</{{ as }}>

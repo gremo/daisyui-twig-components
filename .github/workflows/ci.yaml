@@ -1,0 +1,52 @@
+name: Continuous Integration
+
+on:
+    push:
+        branches:
+            - main
+        paths:
+            - '.github/workflows/ci.yaml'
+            - 'config/**'
+            - 'src/**'
+            - 'templates/**'
+            - 'tests/**'
+            - '.php-cs-fixer.dist.php'
+            - 'composer.json'
+            - 'phpstan.dist.neon'
+            - 'phpunit.xml.dist'
+    pull_request:
+
+jobs:
+    ci:
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                php-version: [8.1, 8.2, 8.3, 8.4]
+                dependency-versions: [highest]
+                include:
+                    # Tests the lowest set of dependencies
+                    - php-version: 8.1
+                      dependency-versions: lowest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php-version }}
+
+            - name: Install dependencies with Composer
+              uses: ramsey/composer-install@v3
+              with:
+                  dependency-versions: ${{ matrix.dependency-versions }}
+
+            - name: Run PHPStan
+              run: vendor/bin/phpstan analyze
+
+            - name: Run PHP CS Fixer
+              run: PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer check
+
+            - name: Run tests
+              run: vendor/bin/phpunit

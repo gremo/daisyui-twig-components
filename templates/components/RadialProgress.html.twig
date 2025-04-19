@@ -1,0 +1,21 @@
+{% props
+    value,
+    as = "div",
+    content = null,
+    size = null,
+    thickness = null,
+%}
+
+<{{ as }}
+    {{ attributes
+        .without("role", "style", "aria-valuenow")
+        .defaults({
+            "aria-valuenow": value,
+            class: "radial-progress",
+            role: "progressbar",
+            style: "--value:#{value};"~(size is not null ? " --size:#{size};" : "")~(thickness is not null ? "--thickness:#{thickness};" : ""),
+        })
+    }}
+>
+    {% block content %}{% if content is not null %}{{ content }}{% else %}{{ value }}{% endif %}{% endblock %}
+</{{ as }}>

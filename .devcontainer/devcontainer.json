@@ -1,0 +1,71 @@
+{
+    "image": "php:8.4-cli",
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:2": {
+            "installZsh": false
+        }
+    },
+    "postCreateCommand": "/bin/bash ./.devcontainer/postCreateCommand.sh",
+    "mounts": [
+        {
+            "source": "${localWorkspaceFolderBasename}-var",
+            "target": "${containerWorkspaceFolder}/var",
+            "type": "volume"
+        },
+        {
+            "source": "${localWorkspaceFolderBasename}-vendor",
+            "target": "${containerWorkspaceFolder}/vendor",
+            "type": "volume"
+        }
+    ],
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "[php]": {
+                    "editor.defaultFormatter": "junstyle.php-cs-fixer"
+                },
+                "editor.codeActionsOnSave": {
+                    "source.fixAll": "always"
+                },
+                "editor.formatOnSave": true,
+                "editor.linkedEditing": true,
+                "files.exclude": {
+                    ".phpunit.cache/": true,
+                    "var/": true,
+                    "vendor/": true
+                },
+                "php-cs-fixer.executablePath": "${workspaceFolder}/vendor/bin/php-cs-fixer",
+                "php.completion.autoimport-docblock": "fqn",
+                "php.completion.docblock": false,
+                "php.format.codeStyle": "Off",
+                "php.inlayHints.parameters.enabled": false,
+                "php.inlayHints.types.return": false,
+                "php.suggest.basic": false,
+                "php.validate.enable": false,
+                "php.version": "${containerEnv:PHP_VERSION}",
+                "phpstan.enabled": true,
+                "phpstan.initialAnalysis": false,
+                "phpstan.path": "vendor/bin/phpstan",
+                "phpTools.suppressPremiumFeatures": true,
+                "phpunit.php": "/usr/local/bin/php",
+                "phpunit.phpunit": "vendor/bin/simple-phpunit",
+                "twig-language-2.formatting": false,
+                "todo-tree.filtering.excludeGlobs": [
+                    "var/",
+                    "vendor/"
+                ]
+            },
+            "extensions": [
+                "DEVSENSE.phptools-vscode",
+                "donjayamanne.githistory",
+                "editorconfig.editorconfig",
+                "gruntfuggly.todo-tree",
+                "junstyle.php-cs-fixer",
+                "mblode.twig-language-2",
+                "recca0120.vscode-phpunit",
+                "remcohaszing.schemastore",
+                "swordev.phpstan"
+            ]
+        }
+    }
+}

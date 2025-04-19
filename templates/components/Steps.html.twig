@@ -1,0 +1,21 @@
+<{{ as }}
+    {{- attributes
+        .defaults({
+            class: html_cva(
+                base: "steps",
+                variants: {
+                    direction: {
+                        horizontal: "steps-horizontal",
+                        vertical: "steps-vertical",
+                    },
+                },
+            ).apply(
+                {
+                    direction,
+                },
+            ),
+        })
+    -}}
+>
+    {% block content %}{% endblock %}
+</{{ as }}>

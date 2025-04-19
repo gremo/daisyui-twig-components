@@ -1,0 +1,22 @@
+<{{ as }}
+    {{- attributes
+        .defaults({
+            class: html_cva(
+                base: "dock",
+                variants: {
+                    size: {
+                        xs: "dock-xs",
+                        sm: "dock-sm",
+                        md: "dock-md",
+                        lg: "dock-lg",
+                        xl: "dock-xl",
+                    },
+                },
+            ).apply({
+                size,
+            }),
+        })
+    -}}
+>
+    {% block content %}{% endblock %}
+</{{ as }}>

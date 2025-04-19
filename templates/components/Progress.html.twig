@@ -1,0 +1,26 @@
+<progress
+    {{- attributes
+        .defaults({
+            class: html_cva(
+                base: "progress",
+                variants: {
+                    color: {
+                        accent: "progress-accent",
+                        error: "progress-error",
+                        info: "progress-info",
+                        neutral: "progress-neutral",
+                        primary: "progress-primary",
+                        secondary: "progress-secondary",
+                        success: "progress-success",
+                        warning: "progress-warning",
+                    },
+                },
+            ).apply(
+                {
+                    color,
+                },
+            ),
+        })
+    -}}
+>
+</progress>

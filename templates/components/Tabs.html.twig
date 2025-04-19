@@ -1,0 +1,38 @@
+<{{ as }}
+    {{- attributes
+        .without("role")
+        .defaults({
+            id,
+            class: html_cva(
+                base: "tabs",
+                variants: {
+                    placement: {
+                        top: "tabs-top",
+                        bottom: "tabs-bottom",
+                    },
+                    size: {
+                        xs: "tabs-xs",
+                        sm: "tabs-sm",
+                        md: "tabs-md",
+                        lg: "tabs-lg",
+                        xl: "tabs-xl",
+                    },
+                    style: {
+                        border: "tabs-border",
+                        box: "tabs-box",
+                        lift: "tabs-lift",
+                    },
+                },
+            ).apply(
+                {
+                    placement,
+                    size,
+                    style,
+                },
+            ),
+            role: "tablist",
+        })
+    -}}
+>
+    {% block content %}{% endblock %}
+</{{ as }}>

@@ -1,0 +1,14 @@
+{% props
+    as = "div",
+    content = null,
+%}
+
+<{{ as }}
+    {{ attributes
+        .defaults({
+            class: "collapse-title",
+        })
+    }}
+>
+    {% block content %}{% if content is not null %}{{ content }}{% endif %}{% endblock %}
+</{{ as }}>

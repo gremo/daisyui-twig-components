@@ -1,0 +1,21 @@
+<{{ as }}
+    {{- attributes
+        .defaults({
+            id,
+            class: "drawer"
+        })
+    -}}
+>
+    <input
+        {{- attributes
+            .nested("input")
+            .without("id", "class", "type")
+            .defaults({
+                class: "drawer-toggle",
+                type: "checkbox",
+                ...inputAttributes,
+            })
+        -}}
+    >
+    {% block content %}{% endblock %}
+</{{ as }}>

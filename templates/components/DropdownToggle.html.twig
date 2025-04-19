@@ -1,0 +1,3 @@
+<twig:Button {{ ...attributes.without(...toggleAttributes.without("class")|keys).defaults(toggleAttributes) }}>
+     {{ block(outerBlocks.content) }}
+</twig:Button>

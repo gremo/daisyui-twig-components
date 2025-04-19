@@ -1,0 +1,11 @@
+{% with {
+    renderWrapper: as is not null or attributes|length > 0,
+} %}
+    {% if renderWrapper %}
+    <{{ as }} {{ attributes -}}>
+    {% endif %}
+        {% block content %}{% endblock %}
+    {% if renderWrapper %}
+    </{{ as }}>
+    {% endif %}
+{% endwith %}

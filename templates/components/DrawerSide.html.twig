@@ -1,0 +1,23 @@
+{% props
+    as = "div",
+%}
+
+<{{ as }}
+    {{ attributes
+        .defaults({
+            class: "drawer-side",
+        })
+    }}
+>
+    <label
+        {{ attributes
+            .nested("overlay")
+            .without("for")
+            .defaults({
+                ...(labelAttributes ?? []),
+                class: "drawer-overlay",
+            })
+        }}
+    ></label>
+    {% block content %}{% endblock %}
+</{{ as }}>

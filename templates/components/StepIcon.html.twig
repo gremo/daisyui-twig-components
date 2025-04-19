@@ -1,0 +1,14 @@
+{% props
+    as = "span",
+    content = null,
+%}
+
+<{{ as }}
+    {{ attributes
+        .defaults({
+            class: "step-icon",
+        })
+    }}
+>
+    {% block content %}{% if content is not null %}{{ content }}{% endif %}{% endblock %}
+</{{ as }}>

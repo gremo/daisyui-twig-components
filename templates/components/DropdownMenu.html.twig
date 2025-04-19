@@ -1,0 +1,3 @@
+<twig:Menu {{ ...attributes.without(...contentAttributes.without("class")|keys).defaults(contentAttributes) }}>
+    {{ block(outerBlocks.content) }}
+</twig:Menu>

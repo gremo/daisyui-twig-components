@@ -1,0 +1,29 @@
+<{{ as }}
+    {{- attributes
+        .without("data-content")
+        .defaults({
+            class: html_cva(
+                base: "step",
+                variants: {
+                    color: {
+                        accent: "step-accent",
+                        error: "step-error",
+                        info: "step-info",
+                        neutral: "step-neutral",
+                        primary: "step-primary",
+                        secondary: "step-secondary",
+                        success: "step-success",
+                        warning: "step-warning",
+                    },
+                },
+            ).apply(
+                {
+                    color,
+                },
+            ),
+            ...(icon is not null ? { "data-content": icon } : {}),
+        })
+    -}}
+>
+    {% block content %}{% if content is not null %}{{ content }}{% endif %}{% endblock %}
+</{{ as }}>

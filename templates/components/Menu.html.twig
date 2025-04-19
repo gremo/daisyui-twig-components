@@ -1,0 +1,27 @@
+<{{ as }}
+    {{- attributes
+        .defaults({
+            class: html_cva(
+                base: "menu",
+                variants: {
+                    direction: {
+                        horizontal: "menu-horizontal",
+                        vertical: "menu-vertical",
+                    },
+                    size: {
+                        xs: "menu-xs",
+                        sm: "menu-sm",
+                        md: "menu-md",
+                        lg: "menu-lg",
+                        xl: "menu-xl",
+                    },
+                },
+            ).apply({
+                direction,
+                size,
+            }),
+        })
+    -}}
+>
+    {% block content %}{% endblock %}
+</{{ as }}>

@@ -1,0 +1,47 @@
+<{{ as }}
+    {{ attributes
+        .without(trigger == "focus" ? "tabindex" : "")
+        .defaults({
+            class: html_cva(
+                base: "collapse",
+                variants: {
+                    icon: {
+                        arrow: "collapse-arrow",
+                        plus: "collapse-plus",
+                    },
+                },
+            ).apply(
+                {
+                    icon,
+                 },
+                html_classes({
+                    "collapse-open": open,
+                })
+            ),
+            ...(trigger == "focus" ? { tabindex: 0 } : {}),
+        })
+    }}
+>
+    {% if trigger == "click" %}
+        <input
+            {{ attributes
+                .nested("input")
+                .defaults({
+                    type: "checkbox",
+                })
+            }}
+        >
+    {% endif %}
+    {% if title is not null %}
+        <twig:CollapseTitle
+            {{ ...attributes
+                .nested("title")
+                .without("content")
+                .defaults({
+                    content: title,
+                })
+            }}
+        />
+    {% endif %}
+    {% block content %}{% endblock %}
+</{{ as }}>

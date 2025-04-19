@@ -1,0 +1,34 @@
+<{{ as }}
+    {{- attributes
+        .defaults({
+            class: html_cva(
+                base: "dropdown",
+                variants: {
+                    align: {
+                        center: "dropdown-center",
+                        end: "dropdown-end",
+                        start: "dropdown-start",
+                    },
+                    placement: {
+                        bottom: "dropdown-bottom",
+                        left: "dropdown-left",
+                        right: "dropdown-right",
+                        top: "dropdown-top",
+                    },
+                },
+            ).apply(
+                {
+                    align,
+                    placement,
+                },
+                html_classes({
+                    "dropdown-hover": "hover" == trigger,
+                    "dropdown-open": open,
+                }),
+            ),
+        })
+    -}}
+>
+    {# Keep this comment class="dropdown-content" as this CSS class is added via PHP. #}
+    {% block content %}{% endblock %}
+</{{ as }}>
