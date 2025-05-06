@@ -1,0 +1,34 @@
+<{{ as }}
+    {{- attributes
+        .defaults({
+            class: html_cva(
+                base: "progress",
+                variants: {
+                    color: {
+                        accent: "status-accent",
+                        error: "status-error",
+                        info: "status-info",
+                        neutral: "status-neutral",
+                        primary: "status-primary",
+                        secondary: "status-secondary",
+                        success: "status-success",
+                        warning: "status-warning",
+                    },
+                    size: {
+                        xs: "status-xs",
+                        sm: "status-sm",
+                        md: "status-md",
+                        lg: "status-lg",
+                        xl: "status-xl",
+                    },
+                },
+            ).apply(
+                {
+                    color,
+                    size,
+                },
+            ),
+        })
+    -}}
+>
+</{{ as }}>

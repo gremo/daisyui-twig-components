@@ -6,6 +6,9 @@
         }
     },
     "postCreateCommand": "/bin/bash ./.devcontainer/postCreateCommand.sh",
+    "containerEnv": {
+        "PHP_CS_FIXER_IGNORE_ENV": "1"
+    },
     "mounts": [
         {
             "source": "${localWorkspaceFolderBasename}-var",

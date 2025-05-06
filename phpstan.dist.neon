@@ -6,3 +6,4 @@ parameters:
     ignoreErrors:
         - { identifier: missingType.iterableValue }
         - '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition::children\(\).#'
+        - '#Dynamic call to static method PHPUnit\\Framework\\.*#'

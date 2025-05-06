@@ -32,6 +32,9 @@ class Dropdown implements ValidableComponentInterface
 
     public bool $open = false;
 
+    /**
+     * @param array{trigger: "focus"|"click"|"hover"|null} $data
+     */
     #[PreMount]
     public function preMount(array $data): array
     {

@@ -14,6 +14,7 @@ use Gremo\DaisyUITwigComponents\Twig\Components\Kbd;
 use Gremo\DaisyUITwigComponents\Twig\Components\Loading;
 use Gremo\DaisyUITwigComponents\Twig\Components\Menu;
 use Gremo\DaisyUITwigComponents\Twig\Components\Progress;
+use Gremo\DaisyUITwigComponents\Twig\Components\Status;
 use Gremo\DaisyUITwigComponents\Twig\Components\Step;
 use Gremo\DaisyUITwigComponents\Twig\Components\Steps;
 use Gremo\DaisyUITwigComponents\Twig\Components\Tabs;
@@ -91,6 +92,12 @@ return static function (ContainerConfigurator $container): void {
         ->set('.daisyui_twig_components.progress', Progress::class)
             ->tag('twig.component', [
                 'key' => 'Progress',
+                'expose_public_props' => true,
+            ])
+
+        ->set('.daisyui_twig_components.status', Status::class)
+            ->tag('twig.component', [
+                'key' => 'Status',
                 'expose_public_props' => true,
             ])
 
